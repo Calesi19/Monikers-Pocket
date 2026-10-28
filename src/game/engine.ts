@@ -3,13 +3,7 @@
 // and a game survives a refresh, a locked screen, or a dead tab.
 import { NAMES, type NameCard } from './names'
 
-export interface TeamSetup {
-  name: string
-  players: string[]
-}
-
 export interface GameConfig {
-  teams: [TeamSetup, TeamSetup]
   deckSize: number
   turnSeconds: number
   customNames: string[]
@@ -26,7 +20,6 @@ export type Phase =
 export type TeamIdx = 0 | 1
 
 export interface GameState {
-  teams: [TeamSetup, TeamSetup]
   turnSeconds: number
   /** The game's full deck — the same cards are reused all three rounds. */
   deck: NameCard[]
@@ -41,9 +34,6 @@ export interface GameState {
   phase: Phase
   /** Whose turn it is (or was, on summary screens). */
   turnTeam: TeamIdx
-  /** Next clue-giver index within each team. */
-  cursors: [number, number]
-  giverName: string | null
   /** Names guessed during the current/last turn, for the summary screen. */
   turnGuessed: string[]
   /** Epoch ms when the active turn runs out; null outside the turn phase. */
@@ -85,7 +75,6 @@ export function newGame(config: GameConfig): GameState {
   const builtinCount = Math.max(0, config.deckSize - custom.length)
   const deck = shuffle([...custom, ...shuffle(NAMES).slice(0, builtinCount)])
   return {
-    teams: config.teams,
     turnSeconds: config.turnSeconds,
     deck,
     removed: [],
@@ -98,8 +87,6 @@ export function newGame(config: GameConfig): GameState {
     ],
     phase: 'roundIntro',
     turnTeam: 0,
-    cursors: [0, 0],
-    giverName: null,
     turnGuessed: [],
     turnEndsAt: null,
     deckCleared: false,
@@ -117,20 +104,15 @@ export function totalScores(state: GameState): [number, number] {
   ]
 }
 
-/** Pick the giver for the upcoming turn and move to the pass screen. */
+/** Move to the pass screen: hand the phone to the team that's up. */
 export function toPassScreen(state: GameState): GameState {
-  const team = state.teams[state.turnTeam]
-  const giver = team.players[state.cursors[state.turnTeam] % team.players.length]
-  return { ...state, giverName: giver, phase: 'pass', deckCleared: false }
+  return { ...state, phase: 'pass', deckCleared: false }
 }
 
-/** Begin the timed turn. The giver was chosen by toPassScreen. */
+/** Begin the timed turn. */
 export function startTurn(state: GameState, now: number): GameState {
-  const cursors: [number, number] = [...state.cursors] as [number, number]
-  cursors[state.turnTeam] += 1
   return {
     ...state,
-    cursors,
     turnGuessed: [],
     turnEndsAt: now + state.turnSeconds * 1000,
     phase: 'turn',
@@ -207,7 +189,6 @@ export function nextRound(state: GameState): GameState {
     remaining: shuffle(state.deck),
     turnTeam,
     phase: 'roundIntro',
-    giverName: null,
     turnGuessed: [],
     turnEndsAt: null,
     deckCleared: false,

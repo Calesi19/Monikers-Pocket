@@ -14,7 +14,7 @@ import {
   type GameState,
 } from '../game/engine'
 import { beep, buzz, keepAwake, primeAudio } from '../fx'
-import { Btn, Card, ScoreBug, TeamChip, cn } from '../ui'
+import { Btn, Card, ScoreBug, TEAM_META, TeamChip, cn } from '../ui'
 
 export type Act = (fn: (s: GameState) => GameState) => void
 
@@ -29,7 +29,7 @@ function Header({ state }: { state: GameState }) {
           {state.remaining.length} cards left
         </span>
       </div>
-      <ScoreBug teams={state.teams} totals={totalScores(state)} />
+      <ScoreBug totals={totalScores(state)} />
     </div>
   )
 }
@@ -65,19 +65,18 @@ export function PassScreen({ state, act }: { state: GameState; act: Act }) {
     <div className="space-y-5">
       <Header state={state} />
       <Card className={cn('p-6 text-center', team === 0 ? 'bg-mint/50' : 'bg-teamb/40')}>
-        <p className="text-xs font-black tracking-widest uppercase text-ink/60">
-          Pass the phone to
-        </p>
-        <p className="mt-1 text-4xl font-black uppercase">{state.giverName}</p>
-        <div className="mt-3">
-          <TeamChip team={team} name={state.teams[team].name} />
+        <div>
+          <TeamChip team={team} />
         </div>
+        <p className="mt-2 text-4xl font-black uppercase">You're up!</p>
         <p className="mx-auto mt-3 max-w-xs text-sm font-semibold text-ink/75">
-          {state.giverName} gives the clues — {state.teams[team].name} guesses.
-          Everyone else: eyes off the card!
+          Hand the phone to whoever is giving clues for the{' '}
+          {TEAM_META[team].label} team this turn. The rest of the team
+          guesses — everyone else, eyes off the card!
         </p>
         <p className="mt-2 text-xs font-bold text-ink/60">
-          Round {state.round + 1}: {ROUND_RULES[state.round].title}
+          Round {state.round + 1}: {ROUND_RULES[state.round].title} ·{' '}
+          {state.turnSeconds} seconds
         </p>
       </Card>
       <Btn
@@ -87,7 +86,7 @@ export function PassScreen({ state, act }: { state: GameState; act: Act }) {
           act((s) => startTurn(s, Date.now()))
         }}
       >
-        I'm {state.giverName} — Start
+        Start Turn
       </Btn>
     </div>
   )
@@ -198,16 +197,12 @@ export function TurnScreen({ state, act }: { state: GameState; act: Act }) {
 export function TurnSummary({ state, act }: { state: GameState; act: Act }) {
   const team = state.turnTeam
   const nextTeam = team === 0 ? 1 : 0
-  const nextGiver =
-    state.teams[nextTeam].players[
-      state.cursors[nextTeam] % state.teams[nextTeam].players.length
-    ]
   return (
     <div className="space-y-5">
       <Header state={state} />
       <Card className={cn('p-6 text-center', team === 0 ? 'bg-mint/50' : 'bg-teamb/40')}>
         <div>
-          <TeamChip team={team} name={state.teams[team].name} />
+          <TeamChip team={team} />
         </div>
         <p className="mt-2 text-3xl font-black uppercase">
           +{state.turnGuessed.length} this turn
@@ -243,7 +238,7 @@ export function TurnSummary({ state, act }: { state: GameState; act: Act }) {
       <Btn variant="main" onClick={() => act(afterSummary)}>
         {state.remaining.length === 0
           ? 'See Round Results'
-          : `Pass to ${nextGiver} (${state.teams[nextTeam].name})`}
+          : `Pass to the ${TEAM_META[nextTeam].label} Team`}
       </Btn>
     </div>
   )
@@ -258,8 +253,8 @@ export function RoundEnd({ state, act }: { state: GameState; act: Act }) {
           Round {state.round + 1} complete
         </p>
         <p className="mt-2 text-2xl font-black">
-          {state.teams[0].name} {state.scores[state.round][0]} —{' '}
-          {state.scores[state.round][1]} {state.teams[1].name}
+          Green {state.scores[state.round][0]} — {state.scores[state.round][1]}{' '}
+          Pink
         </p>
         <p className="mt-1 text-sm font-bold text-ink/70">
           Total: {totals[0]} — {totals[1]}

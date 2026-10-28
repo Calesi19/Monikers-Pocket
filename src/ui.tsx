@@ -65,7 +65,10 @@ export function Card({
   )
 }
 
-export function TeamChip({ team, name }: { team: TeamIdx; name: string }) {
+/** The two teams are fixed colors — no names, no sign-ups. */
+export const TEAM_META: { label: string }[] = [{ label: 'Green' }, { label: 'Pink' }]
+
+export function TeamChip({ team }: { team: TeamIdx }) {
   return (
     <span
       className={cn(
@@ -73,26 +76,20 @@ export function TeamChip({ team, name }: { team: TeamIdx; name: string }) {
         team === 0 ? 'bg-teama' : 'bg-teamb',
       )}
     >
-      {name}
+      {TEAM_META[team].label} Team
     </span>
   )
 }
 
-export function ScoreBug({
-  teams,
-  totals,
-}: {
-  teams: [{ name: string }, { name: string }]
-  totals: [number, number]
-}) {
+export function ScoreBug({ totals }: { totals: [number, number] }) {
   return (
     <div className="flex items-center justify-center gap-2 text-sm font-black">
       <span className="rounded-base border-2 border-ink bg-teama px-2.5 py-1 shadow-brutal-sm">
-        {teams[0].name} · {totals[0]}
+        Green · {totals[0]}
       </span>
       <span className="text-ink/50">—</span>
       <span className="rounded-base border-2 border-ink bg-teamb px-2.5 py-1 shadow-brutal-sm">
-        {totals[1]} · {teams[1].name}
+        {totals[1]} · Pink
       </span>
     </div>
   )

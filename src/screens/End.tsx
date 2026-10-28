@@ -1,5 +1,5 @@
 import { totalScores, type GameState } from '../game/engine'
-import { Btn, Card } from '../ui'
+import { Btn, Card, TEAM_META } from '../ui'
 
 export function GameEnd({
   state,
@@ -35,7 +35,7 @@ export function GameEnd({
         <p className="mt-2 text-2xl font-black uppercase">
           {winner === null
             ? "It's a tie!"
-            : `${state.teams[winner].name} win!`}
+            : `${TEAM_META[winner].label} Team wins!`}
         </p>
       </Card>
 
@@ -43,9 +43,7 @@ export function GameEnd({
         <div className="space-y-1.5 text-sm font-bold">
           <div className="flex items-center justify-between text-ink/60">
             <span></span>
-            <span>
-              {state.teams[0].name} · {state.teams[1].name}
-            </span>
+            <span>Green · Pink</span>
           </div>
           {state.scores.map((r, i) => (
             <div key={i} className="flex items-center justify-between">
@@ -70,10 +68,10 @@ export function GameEnd({
       </Card>
 
       <Btn variant="main" onClick={onPlayAgain}>
-        Play Again — Same Teams
+        Play Again
       </Btn>
       <Btn variant="neutral" onClick={onSetup}>
-        New Teams
+        Change Settings
       </Btn>
       <Btn variant="neutral" onClick={onHome}>
         Home

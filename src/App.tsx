@@ -17,7 +17,7 @@ import {
 import { GameEnd } from './screens/End'
 import { Btn, HowToPlay } from './ui'
 
-const SAVE_KEY = 'monikers-pocket-save-v1'
+const SAVE_KEY = 'monikers-pocket-save-v2'
 
 function loadSave(): GameState | null {
   try {
@@ -72,7 +72,6 @@ export default function App() {
   function playAgain() {
     if (!game) return
     startGame({
-      teams: game.teams,
       turnSeconds: game.turnSeconds,
       deckSize: game.deck.length + game.removed.length,
       customNames: game.deck
