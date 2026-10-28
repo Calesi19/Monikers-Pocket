@@ -150,16 +150,23 @@ export function TurnScreen({ state, act }: { state: GameState; act: Act }) {
         </div>
       </div>
 
-      <Card key={card.name} className="animate-pop p-6 text-center">
-        <span className="inline-block rounded-base border-2 border-ink bg-lemon px-2.5 py-0.5 text-[11px] font-black tracking-widest uppercase shadow-brutal-sm">
+      <Card
+        key={card.name}
+        className="animate-pop flex h-72 flex-col p-6 text-center"
+      >
+        <span className="inline-block self-center rounded-base border-2 border-ink bg-lemon px-2.5 py-0.5 text-[11px] font-black tracking-widest uppercase shadow-brutal-sm">
           {card.tag}
         </span>
-        <p className="mt-3 text-4xl leading-tight font-black uppercase">
-          {card.name}
-        </p>
-        <p className="mx-auto mt-2 max-w-xs text-sm font-semibold text-ink/70">
-          {card.blurb}
-        </p>
+        <div className="flex flex-1 items-center justify-center">
+          <p className="text-4xl leading-tight font-black uppercase">
+            {card.name}
+          </p>
+        </div>
+        <div className="flex h-16 items-start justify-center overflow-hidden">
+          <p className="mx-auto max-w-xs text-sm font-semibold text-ink/70">
+            {card.blurb}
+          </p>
+        </div>
       </Card>
 
       <div className="grid grid-cols-2 gap-3">
@@ -253,8 +260,8 @@ export function RoundEnd({ state, act }: { state: GameState; act: Act }) {
           Round {state.round + 1} complete
         </p>
         <p className="mt-2 text-2xl font-black">
-          Green {state.scores[state.round][0]} — {state.scores[state.round][1]}{' '}
-          Pink
+          Blue {state.scores[state.round][0]} — {state.scores[state.round][1]}{' '}
+          Gold
         </p>
         <p className="mt-1 text-sm font-bold text-ink/70">
           Total: {totals[0]} — {totals[1]}

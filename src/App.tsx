@@ -105,7 +105,7 @@ export default function App() {
               <img
                 src={`${import.meta.env.BASE_URL}icon-192.png`}
                 alt=""
-                className="mx-auto h-24 w-24 rounded-base border-2 border-ink shadow-brutal"
+                className="mx-auto h-24 w-24 rounded-[22%] border-2 border-ink shadow-brutal"
               />
               <h1 className="mt-4 text-5xl font-black tracking-tight uppercase">
                 Monikers
@@ -132,10 +132,6 @@ export default function App() {
               <HowToPlay />
             </div>
 
-            <p className="text-center text-xs font-semibold text-ink/55">
-              Pass-and-play: everyone in the same room, one phone passed hand
-              to hand. Works offline once it has loaded.
-            </p>
           </div>
         )}
 

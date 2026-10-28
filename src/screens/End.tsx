@@ -43,7 +43,7 @@ export function GameEnd({
         <div className="space-y-1.5 text-sm font-bold">
           <div className="flex items-center justify-between text-ink/60">
             <span></span>
-            <span>Green · Pink</span>
+            <span>Blue · Gold</span>
           </div>
           {state.scores.map((r, i) => (
             <div key={i} className="flex items-center justify-between">

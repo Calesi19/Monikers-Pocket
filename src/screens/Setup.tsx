@@ -52,11 +52,11 @@ export function Setup({
 
       <div className="grid grid-cols-2 gap-3 text-center">
         <div className="rounded-base border-2 border-ink bg-teama px-3 py-4 shadow-brutal">
-          <p className="text-2xl font-black uppercase">Green</p>
+          <p className="text-2xl font-black uppercase">Blue</p>
           <p className="text-xs font-bold text-ink/60">Team One</p>
         </div>
         <div className="rounded-base border-2 border-ink bg-teamb px-3 py-4 shadow-brutal">
-          <p className="text-2xl font-black uppercase">Pink</p>
+          <p className="text-2xl font-black uppercase">Gold</p>
           <p className="text-xs font-bold text-ink/60">Team Two</p>
         </div>
       </div>

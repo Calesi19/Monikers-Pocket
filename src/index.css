@@ -4,10 +4,10 @@
   --color-bg: #e3f0ee;
   --color-main: #ff6b4a;
   --color-main-deep: #d9481f;
-  --color-lemon: #ffd166;
+  --color-lemon: #ffe08a;
   --color-mint: #8fd0c2;
-  --color-teama: #2fa84f;
-  --color-teamb: #e5488c;
+  --color-teama: #1d74c4;
+  --color-teamb: #f2a007;
   --color-hot-pink: #ff2e88;
   --color-ink: #14323e;
   --shadow-brutal: 4px 4px 0 0 #14323e;
@@ -17,6 +17,7 @@
 
 html {
   background: var(--color-bg);
+  overscroll-behavior: none;
 }
 
 body {
@@ -25,6 +26,7 @@ body {
     sans-serif;
   color: var(--color-ink);
   -webkit-tap-highlight-color: transparent;
+  overscroll-behavior: none;
 }
 
 /* chunky pressable button */
