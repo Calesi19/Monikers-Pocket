@@ -6,7 +6,6 @@ import { NAMES, type NameCard } from './names'
 export interface GameConfig {
   deckSize: number
   turnSeconds: number
-  customNames: string[]
 }
 
 export type Phase =
@@ -67,13 +66,7 @@ export function shuffle<T>(arr: T[]): T[] {
 }
 
 export function newGame(config: GameConfig): GameState {
-  const custom: NameCard[] = config.customNames.map((name) => ({
-    name,
-    tag: 'Custom',
-    blurb: 'Added by a player in this room.',
-  }))
-  const builtinCount = Math.max(0, config.deckSize - custom.length)
-  const deck = shuffle([...custom, ...shuffle(NAMES).slice(0, builtinCount)])
+  const deck = shuffle(NAMES).slice(0, config.deckSize)
   return {
     turnSeconds: config.turnSeconds,
     deck,

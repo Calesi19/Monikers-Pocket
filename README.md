@@ -6,8 +6,7 @@ the same deck all the way through.
 
 **Play it:** https://calesi19.github.io/Monikers-Pocket/
 
-- 181 built-in name cards with a short blurb each, plus optional custom
-  names added during setup
+- 181 built-in name cards with a short blurb each
 - 30/40/50-card decks, 45/60/90-second turns
 - The game saves itself after every move — refresh, lock the phone, come
   back later and resume

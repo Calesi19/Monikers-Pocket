@@ -74,9 +74,6 @@ export default function App() {
     startGame({
       turnSeconds: game.turnSeconds,
       deckSize: game.deck.length + game.removed.length,
-      customNames: game.deck
-        .filter((c) => c.tag === 'Custom')
-        .map((c) => c.name),
     })
   }
 

@@ -1,17 +1,17 @@
 @import "tailwindcss";
 
 @theme {
-  --color-bg: #f0eefc;
-  --color-main: #b3a8f5;
-  --color-main-deep: #7c6cd9;
-  --color-lemon: #fde68a;
-  --color-mint: #a7f3d0;
-  --color-teama: #6ee7b7;
-  --color-teamb: #f9a8d4;
-  --color-hot-pink: #fda4af;
-  --color-ink: #1f2933;
-  --shadow-brutal: 4px 4px 0 0 #1f2933;
-  --shadow-brutal-sm: 2px 2px 0 0 #1f2933;
+  --color-bg: #e3f0ee;
+  --color-main: #ff6b4a;
+  --color-main-deep: #d9481f;
+  --color-lemon: #ffd166;
+  --color-mint: #8fd0c2;
+  --color-teama: #2fa84f;
+  --color-teamb: #e5488c;
+  --color-hot-pink: #ff2e88;
+  --color-ink: #14323e;
+  --shadow-brutal: 4px 4px 0 0 #14323e;
+  --shadow-brutal-sm: 2px 2px 0 0 #14323e;
   --radius-base: 0.75rem;
 }
 
@@ -27,7 +27,7 @@ body {
   -webkit-tap-highlight-color: transparent;
 }
 
-/* chunky pressable button, same feel as the Just One app */
+/* chunky pressable button */
 .btn-brutal {
   transition:
     transform 80ms ease,
@@ -35,7 +35,7 @@ body {
 }
 .btn-brutal:active {
   transform: translate(2px, 2px);
-  box-shadow: 0 0 0 0 #1f2933 !important;
+  box-shadow: 0 0 0 0 #14323e !important;
 }
 
 @keyframes shake {

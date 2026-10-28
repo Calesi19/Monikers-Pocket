@@ -1,6 +1,5 @@
 // The built-in deck: well-known people and characters, each with a short
-// original blurb so nobody is stuck on who a name is. Players can also add
-// their own names during setup — those get the "Custom" tag.
+// original blurb so nobody is stuck on who a name is.
 export interface NameCard {
   name: string
   tag: string

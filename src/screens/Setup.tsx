@@ -41,16 +41,9 @@ export function Setup({
 }) {
   const [deckSize, setDeckSize] = useState(40)
   const [turnSeconds, setTurnSeconds] = useState(60)
-  const [customText, setCustomText] = useState('')
 
   function start() {
-    const customNames = [...new Set(
-      customText
-        .split('\n')
-        .map((s) => s.trim())
-        .filter(Boolean),
-    )].slice(0, 30)
-    onStart({ deckSize, turnSeconds, customNames })
+    onStart({ deckSize, turnSeconds })
   }
 
   return (
@@ -95,16 +88,6 @@ export function Setup({
             render={(v) => `${v}s`}
           />
         </div>
-        <p className="mt-4 text-xs font-black tracking-widest uppercase text-ink/60">
-          Add your own names (optional, one per line)
-        </p>
-        <textarea
-          value={customText}
-          onChange={(e) => setCustomText(e.target.value)}
-          rows={3}
-          placeholder={'Grandma Rosa\nThe family dog\n...'}
-          className="mt-2 w-full rounded-base border-2 border-ink bg-white px-3 py-2 font-bold placeholder:text-ink/35 focus:outline-none"
-        />
       </Card>
 
       <Btn variant="main" onClick={start}>
