@@ -144,7 +144,7 @@ export function TurnScreen({ state, act }: { state: GameState; act: Act }) {
         </div>
         <div className="mt-1 h-3 overflow-hidden rounded-base border-2 border-ink bg-white">
           <div
-            className={cn('h-full', low ? 'bg-hot-pink' : 'bg-main')}
+            className={cn('h-full', low ? 'bg-hot-pink' : 'bg-ink')}
             style={{ width: `${fraction * 100}%` }}
           />
         </div>
@@ -170,7 +170,7 @@ export function TurnScreen({ state, act }: { state: GameState; act: Act }) {
       </Card>
 
       <div className="grid grid-cols-2 gap-3">
-        <Btn variant="lemon" onClick={() => act(passCard)}>
+        <Btn variant="neutral" onClick={() => act(passCard)}>
           Pass
         </Btn>
         <Btn variant="mint" onClick={() => act(gotIt)}>
@@ -182,7 +182,7 @@ export function TurnScreen({ state, act }: { state: GameState; act: Act }) {
         type="button"
         className={cn(
           'mx-auto block cursor-pointer text-xs font-bold underline underline-offset-2',
-          armedRemove === card.name ? 'font-black text-red-600' : 'text-ink/50',
+          armedRemove === card.name ? 'font-black text-red-700' : 'text-ink/70',
         )}
         onClick={() => {
           if (armedRemove === card.name) {

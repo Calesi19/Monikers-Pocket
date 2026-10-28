@@ -78,9 +78,13 @@ export default function App() {
   }
 
   const resumable = game !== null && game.phase !== 'gameEnd'
+  const inTurn = screen === 'game' && game?.phase === 'turn'
+  const turnBg = inTurn ? (game.turnTeam === 0 ? 'bg-teama' : 'bg-teamb') : ''
 
   return (
-    <div className="mx-auto flex min-h-dvh w-full max-w-md flex-col px-4 py-5">
+    <div
+      className={`mx-auto flex min-h-dvh w-full max-w-md flex-col px-4 py-5 transition-colors duration-500 ${turnBg}`}
+    >
       {screen === 'game' && game && (
         <div className="mb-3 flex justify-end">
           <button
